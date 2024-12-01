@@ -1,0 +1,179 @@
+<div style="height: 40px;"></div>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <form
+    [formGroup]="annonceForm"
+    (ngSubmit)="onSubmit()"
+    class="container py-4 px-5 rounded shadow-lg bg-white"
+    style="max-width: 500px">
+    <!-- Header -->
+    <h2 class="text-center mb-4" style="font-weight: bold; color: #333;">
+      Ajouter une annonce
+    </h2>
+
+    <!-- Form Group: Titre -->
+    <div class="form-group mb-3">
+      <label for="titre" class="form-label" style="font-weight: 600;">Titre:</label>
+      <input
+        id="titre"
+        formControlName="titre"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      />
+      <div
+        *ngIf="
+          annonceForm.get('titre')?.invalid && annonceForm.get('titre')?.touched
+        "
+        class="text-danger mt-1"
+      >
+        <small *ngIf="annonceForm.get('titre')?.errors?.['required']">
+          Le titre est requis.
+        </small>
+      </div>
+    </div>
+
+    <!-- Form Group: Localisation -->
+    <div class="form-group mb-3">
+      <label for="localisation" class="form-label" style="font-weight: 600;">
+        Localisation:
+      </label>
+      <input
+        id="localisation"
+        formControlName="localisation"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      />
+    </div>
+
+    <!-- Form Group: Category -->
+    <div class="form-group mb-3">
+      <label for="category" class="form-label" style="font-weight: 600;">
+        Catégorie:
+      </label>
+      <input
+        id="category"
+        formControlName="category"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      />
+    </div>
+
+    <!-- Form Group: Prix -->
+    <div class="form-group mb-3">
+      <label for="price" class="form-label" style="font-weight: 600;">Prix:</label>
+      <input
+        id="price"
+        formControlName="price"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      />
+      <div
+        *ngIf="
+          annonceForm.get('price')?.invalid && annonceForm.get('price')?.touched
+        "
+        class="text-danger mt-1"
+      >
+        <small *ngIf="annonceForm.get('price')?.errors?.['required']">
+          Le prix est requis.
+        </small>
+        <small *ngIf="annonceForm.get('price')?.errors?.['pattern']">
+          Le prix doit être un nombre.
+        </small>
+      </div>
+    </div>
+
+    <!-- Form Group: Description -->
+    <div class="form-group mb-3">
+      <label for="description" class="form-label" style="font-weight: 600;">
+        Description:
+      </label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      ></textarea>
+    </div>
+
+    <!-- Form Group: Nombre de Chambres -->
+    <div class="form-group mb-3">
+      <label
+        for="nombre_de_chambres"
+        class="form-label"
+        style="font-weight: 600;"
+      >
+        Nombre de Chambres:
+      </label>
+      <input
+        id="nombre_de_chambres"
+        formControlName="nombre_de_chambres"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      />
+      <div
+        *ngIf="
+          annonceForm.get('nombre_de_chambres')?.invalid &&
+          annonceForm.get('nombre_de_chambres')?.touched
+        "
+        class="text-danger mt-1"
+      >
+        <small
+          *ngIf="annonceForm.get('nombre_de_chambres')?.errors?.['required']"
+        >
+          Le nombre de chambres est requis.
+        </small>
+        <small
+          *ngIf="annonceForm.get('nombre_de_chambres')?.errors?.['pattern']"
+        >
+          Doit être un nombre.
+        </small>
+      </div>
+    </div>
+
+    <!-- Form Group: Surface -->
+    <div class="form-group mb-4">
+      <label for="surface" class="form-label" style="font-weight: 600;">
+        Surface:
+      </label>
+      <input
+        id="surface"
+        formControlName="surface"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+      />
+      <div
+        *ngIf="
+          annonceForm.get('surface')?.invalid && annonceForm.get('surface')?.touched
+        "
+        class="text-danger mt-1"
+      >
+        <small *ngIf="annonceForm.get('surface')?.errors?.['required']">
+          La surface est requise.
+        </small>
+        <small *ngIf="annonceForm.get('surface')?.errors?.['pattern']">
+          Doit être un nombre.
+        </small>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button
+        type="submit"
+        class="btn btn-primary px-4 py-2"
+        [disabled]="annonceForm.invalid"
+        style="
+          background: linear-gradient(135deg, #007bff, #0056b3);
+          border: none;
+          border-radius: 8px;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+        "
+      >
+        Soumettre
+      </button>
+    </div>
+  </form>
+</div>
+

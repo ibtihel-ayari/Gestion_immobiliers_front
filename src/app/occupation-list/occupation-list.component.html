@@ -1,0 +1,21 @@
+<div class="occupation-list container">
+    <h2 class="title">Demandes</h2>
+    <div *ngFor="let occupation of occupations" class="occupation-card card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Request from: {{ occupation.client.username }}</h5>
+        <p class="card-text"><strong>Type:</strong> {{ occupation.occupation_type }}</p>
+        <p class="card-text"><strong>Start Date:</strong> {{ occupation.start_date }}</p>
+        <p class="card-text"><strong>End Date:</strong> {{ occupation.end_date }}</p>
+        <div class="buttons text-end">
+          <button (click)="acceptOccupation(occupation.id)" class="btn btn-success me-2">
+            Accept
+          </button>
+          <button (click)="acceptOccupation(occupation.id)" class="btn btn-danger me-2">
+            Refuser
+          </button>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+  
