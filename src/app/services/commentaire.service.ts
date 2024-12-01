@@ -17,4 +17,6 @@ export class CommentaireService {
   ajouterCommentaire(contenu: any): Observable<any> {
     return this.http.post(this.baseUrl, contenu);
   }
+
+
 }

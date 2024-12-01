@@ -8,36 +8,44 @@ import { OccupationService } from '../services/occupation.service';
 })
 export class OccupationListComponent implements OnInit {
   occupations: any[] = [];
+  user: any;
 
   constructor(private occupationService: OccupationService) {}
 
   ngOnInit(): void {
-    const annonceId = 1; // Replace with the actual annonce ID
-    this.loadOccupations(annonceId);
+    // Fetch user data from localStorage
+    this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+    // Load occupations for this user
+    this.loadOccupations();
   }
 
-  loadOccupations(annonceId: number): void {
-    this.occupationService.getOccupationsByAnnonce(annonceId).subscribe(
-      (data) => {
+  loadOccupations(): void {
+    this.occupationService.getOccupationsByOwner(this.user.id).subscribe({
+      next: (data) => {
         this.occupations = data;
       },
-      (error) => {
-        console.error('Error fetching occupations:', error);
-      }
-    );
+      error: (err) => console.error(err)
+    });
   }
 
-  acceptOccupation(occupationId: number): void {
-    this.occupationService.acceptOccupation(occupationId).subscribe(
-      () => {
-        alert('Occupation accepted successfully.');
-        this.occupations = this.occupations.filter((o) => o.id !== occupationId);
+  handleAccept(occupationId: number): void {
+    this.occupationService.acceptOccupation(occupationId,"accepted").subscribe({
+      next: () => {
+        this.loadOccupations();
       },
-      (error) => {
-        console.error('Error accepting occupation:', error);
-      }
-    );
+      error: (err) => console.error(err)
+    });
   }
 
- 
+  handleRefuse(occupationId: number): void {
+    this.occupationService.acceptOccupation(occupationId,"refused").subscribe({
+      next: () => {
+        this.loadOccupations();
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+
 }

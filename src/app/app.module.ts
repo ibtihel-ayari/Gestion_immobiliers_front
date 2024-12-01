@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnnonceFormComponent } from './annonce-form/annonce-form.component';
 import { AnnonceDetailsComponent } from './annonce-details/annonce-details.component';
 import { FavorisComponent } from './favoris/favoris.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { OccupationListComponent } from './occupation-list/occupation-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -35,7 +35,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

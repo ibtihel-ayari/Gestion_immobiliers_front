@@ -7,23 +7,20 @@ import { Annonce } from '../models/annonce.model';
   providedIn: 'root'
 })
 export class FavorisService {
-  private baseUrl = 'http://localhost:8000/favorites';
+  private apiBaseUrl = 'http://localhost:8000/favorites';
 
   constructor(private http: HttpClient) {}
 
-  getFavoritesByUser(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getfavorite/${userId}`);
+
+  getFavoritesByUser(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiBaseUrl}/getfavorite/${userId}`);
   }
 
-  createFavorite(data: { user_id: number; annonce_id: number }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/create`, data);
+  addFavorite(favoriteData: { user_id: number; annonce_id: number }): Observable<any> {
+    return this.http.post<any>(`${this.apiBaseUrl}/create`, favoriteData);
   }
 
-  deleteFavorite(favoriteId: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/delete/${favoriteId}`, {});
-  }
-
-  getAnnonces(): Observable<any> {
-    return this.http.get('http://localhost:8000/annonces'); // Assuming this endpoint exists
+  removeFavorite(favoriteId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiBaseUrl}/delete/${favoriteId}`, {});
   }
 }
