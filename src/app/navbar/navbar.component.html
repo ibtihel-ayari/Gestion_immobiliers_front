@@ -24,6 +24,20 @@
       .nav-link:hover {
         color: #f8d90f !important; /* Jaune vif pour l'effet hover */
       }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #f8d90f;
+        font-weight: bold;
+        margin-right: 15px;
+      }
+      .user-info img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+      }
       .logout-btn img {
         border-radius: 50%;
         width: 30px;
@@ -61,8 +75,19 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <div class="user-info">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                  alt="Avatar"
+                />
+                <span>{{ getUser().username }}</span>
+              </div>
+            </li>
+          </ul>
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"   >
+            <li class="nav-item">
               <a class="nav-link" routerLink="annonces">Les annonces</a>
             </li>
             <li class="nav-item" *ngIf="isowner()">
@@ -71,7 +96,6 @@
             <li class="nav-item" *ngIf="isclient()">
               <a class="nav-link" routerLink="mydemandes">Mes Demandes</a>
             </li>
-
             <li class="nav-item" *ngIf="isowner()">
               <a class="nav-link" routerLink="create-annonce"
                 >Créer une annonce</a
