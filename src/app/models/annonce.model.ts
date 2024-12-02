@@ -1,31 +1,9 @@
-export interface Profile {
-  phone_number: string | null;
-  role: string | null;
-}
+import { User } from "./User";
 
-export interface Owner {
-  id: number | null;
-  username: string | null;
-  email: string | null;
-  first_name: string | null;
-  last_name: string | null;
-  profile: Profile | null;
-}
-
-
-
-export interface Owner {
-  id: number | null;
-  username: string | null;
-  email: string | null;
-  first_name: string | null;
-  last_name: string | null;
-  profile: Profile | null;
-}
 
 export interface Annonce {
   id: number | null;
-  owner: Owner | null; // Allowing owner to be nullable
+  owner: User | null; // Allowing owner to be nullable
   titre: string | null;
   localisation: string | null;
   category: 'vente' | 'location' | null; // Can be null if not assigned

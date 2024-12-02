@@ -14,6 +14,7 @@ import { OccupationListComponent } from './occupation-list/occupation-list.compo
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MesannoncesComponent } from './mesannonces/mesannonces.component';
+import { MesdemandesComponent } from './mesdemandes/mesdemandes.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MesannoncesComponent } from './mesannonces/mesannonces.component';
     LoginComponent,
     RegisterComponent,
     MesannoncesComponent,
+    MesdemandesComponent,
   ],
   imports: [
     BrowserModule,

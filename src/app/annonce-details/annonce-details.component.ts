@@ -7,7 +7,7 @@ import { CommentaireService } from '../services/commentaire.service';
 import { OccupationService } from '../services/occupation.service';
 import { OccupationCreation } from '../models/occupation';
 import { DatePipe } from '@angular/common';
-import { Commentaire } from '../models/comment';
+import { Commentaire, create_comment } from '../models/comment';
 
 @Component({
   selector: 'app-annonce-details',
@@ -92,7 +92,7 @@ export class AnnonceDetailsComponent implements OnInit {
 
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.commentForm.valid) {
-      const newComment: Commentaire = {
+      const newComment: create_comment = {
         user_id: user.id,
         annonce_id: parseInt(id),
         contenu: this.commentForm.get('contenu').value,

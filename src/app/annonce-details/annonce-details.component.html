@@ -129,11 +129,20 @@
         <!-- Display Comments -->
         <div
           *ngFor="let comment of comments"
-          class="mb-3 p-3 bg-light rounded shadow-sm"
+          class="comment-container mb-3 p-3 bg-light rounded shadow-sm"
         >
-          <p class="mb">{{ comment.user_id }}</p>
-          <p class="mb-1">{{ comment.contenu }}</p>
+          <div class="comment-header d-flex align-items-center mb-2">
+            <span class="user-id fw-bold me-2">{{
+              comment.user.username}}</span>
+            <small class="text-muted">{{
+              comment.date_creation | date : "short"
+            }}</small>
+          </div>
+          <p class="comment-content mb-0 text-secondary">
+            {{ comment.contenu }}
+          </p>
         </div>
+
         <p *ngIf="comments.length === 0" class="text-muted text-center">
           Aucun commentaire pour le moment. Soyez le premier à commenter !
         </p>

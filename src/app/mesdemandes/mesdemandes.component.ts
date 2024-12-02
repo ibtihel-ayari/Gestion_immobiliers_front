@@ -3,11 +3,12 @@ import { OccupationService } from '../services/occupation.service';
 import { Occupation } from '../models/occupation';
 
 @Component({
-  selector: 'app-occupation-list',
-  templateUrl: './occupation-list.component.html',
-  styleUrls: ['./occupation-list.component.css']
+  selector: 'app-mesdemandes',
+  templateUrl: './mesdemandes.component.html',
+  styleUrls: ['./mesdemandes.component.css']
 })
-export class OccupationListComponent implements OnInit {
+export class MesdemandesComponent implements OnInit {
+
   occupations: Occupation[] = [];
   user: any;
 
@@ -50,3 +51,5 @@ export class OccupationListComponent implements OnInit {
 
 
 }
+
+

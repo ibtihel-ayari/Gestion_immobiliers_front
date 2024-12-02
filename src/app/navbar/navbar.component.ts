@@ -18,5 +18,11 @@ export class NavbarComponent implements OnInit {
   islogged() : boolean {
     return this.auth.isAuthenticated()
   }
+  isowner() : boolean {
+    return this.auth.isowner()
+  }
+  isclient() : boolean {
+    return this.auth.isclient()
+  }
 
 }

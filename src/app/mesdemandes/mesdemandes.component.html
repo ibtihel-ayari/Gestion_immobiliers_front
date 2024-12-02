@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <h2 class="text-center  mb-4">Demandes</h2>
+    <div *ngIf="occupations.length === 0" class="alert alert-info text-center shadow-sm">
+      No occupations found.
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let occupation of occupations">
+        <div class="card occupation-card shadow-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title text-center text-secondary">{{ occupation.annonce.titre }}</h5>
+            <hr />
+            <p class="card-text">
+              <strong>Type:</strong> {{ occupation.occupation_type }}<br />
+              <strong>Client:</strong> {{ occupation.client.username }}<br />
+              <strong>Status:</strong>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-success': occupation.is_active === 'accepted',
+                  'bg-danger': occupation.is_active === 'refused',
+                  'bg-warning text-dark': occupation.is_active === 'en attente'
+                }"
+              >
+                {{ occupation.is_active }}
+              </span>
+            </p>
+            <div *ngIf="occupation.occupation_type === 'Location'" class="mt-3">
+              <p class="card-text fs-5">
+                <strong>Start date:</strong> {{ occupation.start_date | date:'longDate' }}<br />
+                <strong>End date:</strong> {{ occupation.end_date | date:'longDate' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <button
+                class="btn btn-success me-2"
+                [disabled]="occupation.is_active !== 'en attente'"
+                (click)="handleAccept(occupation.id)"
+              >
+                Accept
+              </button>
+              <button
+                class="btn btn-danger"
+                [disabled]="occupation.is_active !== 'en attente'"
+                (click)="handleRefuse(occupation.id)"
+              >
+                Refuse
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
