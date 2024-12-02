@@ -32,7 +32,7 @@ export class MesdemandesComponent implements OnInit {
 
   handleAccept(occupationId: number): void {
     this.occupationService
-      .acceptOccupation(occupationId, 'accepted')
+      .acceptOccupation(occupationId,'accepted')
       .subscribe({
         next: () => {
           this.loadOccupations();

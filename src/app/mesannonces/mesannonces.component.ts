@@ -47,16 +47,16 @@ export class MesannoncesComponent implements OnInit {
   }
 
   loadAnnonces() {
-    this.annonceService.getAnnoncesbyowner(this.currentUser.id).subscribe(
-      (data: Annonce[]) => {
+    this.annonceService.getAnnoncesbyowner(this.currentUser.id).subscribe({
+      next: (data) => {
         this.annonces = data;
         this.filteredAnnonces = data;
         console.log('Données des annonces reçues:', data); // Afficher les données dans la console
       },
-      (error) => {
+      error: (error) => {
         console.error('Erreur lors du chargement des annonces', error);
-      }
-    );
+      },
+    });
   }
   goToDetails(id: number | undefined) {
     if (id !== undefined) {
