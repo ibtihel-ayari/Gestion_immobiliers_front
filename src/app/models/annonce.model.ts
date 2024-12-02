@@ -12,6 +12,17 @@ export interface Owner {
   profile: Profile | null;
 }
 
+
+
+export interface Owner {
+  id: number | null;
+  username: string | null;
+  email: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  profile: Profile | null;
+}
+
 export interface Annonce {
   id: number | null;
   owner: Owner | null; // Allowing owner to be nullable
@@ -26,7 +37,7 @@ export interface Annonce {
   image: string | null; // Image field can also be nullable
   equiped: boolean; // Equip status can be nullable
   lease_duration: number | null; // Lease duration can be null
-  is_negotiable: string; // Negotiability can be nullable
+  is_negotiable: string ;// Negotiability can be nullable
   is_occupied: string;
 }
 

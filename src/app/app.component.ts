@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,8 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Gestion immobiliers';
+constructor(private auth:AuthService){}
+  islogged() : boolean {
+    return this.auth.isAuthenticated()
+  }
 }

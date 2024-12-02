@@ -27,10 +27,10 @@ export class AnnonceListComponent implements OnInit {
     image: '',  // The image URL or path should be an empty string initially
     equiped: false,  // Should be a boolean, initialize with false
     lease_duration: null,  // Can be null or a number, initialize with null
-    is_negotiable: '',  // Should be a boolean, initialize with false
+    is_negotiable: '',  
     is_occupied: '',  // Should be a string, initialize with 'no'
     owner: null,  // Should be a number (foreign key), initialize with null
-  };
+  }; 
   filteredAnnonces: Annonce[] = [];
   selectedCategory: string = '';
 
@@ -60,21 +60,7 @@ export class AnnonceListComponent implements OnInit {
     }
   }
 
-  createAnnonce() {
-    if (this.newAnnonce.price) {
-      this.newAnnonce.price = (this.newAnnonce.price.toString());  
-    }
-    this.newAnnonce.date = new Date().toISOString(); // Génère la date actuelle
-    this.annonceService.createAnnonce(this.newAnnonce).subscribe(
-      (response) => {
-        console.log('Annonce créée avec succès:', response); // Afficher la réponse du serveur
-        this.loadAnnonces(); // Recharge la liste après création
-      },
-      (error) => {
-        console.error("Erreur lors de la création de l'annonce", error);
-      }
-    );
-  }
+ 
   // Filtrer les annonces par catégorie
   filterByCategory(): void {
     if (this.selectedCategory) {
