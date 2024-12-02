@@ -10,10 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
  
-  isRegistering: boolean = false;
-  toggleForm() {
-    this.isRegistering = !this.isRegistering;
-  }
+
   username: string = '';
   password: string = '';
   errorMessage: string = '';

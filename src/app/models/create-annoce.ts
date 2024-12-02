@@ -8,5 +8,6 @@ export interface AnnonceCreation {
     nombre_de_chambres: number;
     surface: number;
     image : string ;
+    date : string ; 
 
   }

@@ -24,8 +24,8 @@ export class AnnonceFormComponent implements OnInit {
         [Validators.required, Validators.pattern('^[0-9]*$')],
       ],
       surface: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      date: [''],
-      image: [''],
+      date: ['',[Validators.required]],
+      image: ['',[Validators.required]],
     });
   }
 
@@ -46,7 +46,7 @@ export class AnnonceFormComponent implements OnInit {
         nombre_de_chambres: this.annonceForm.get('nombre_de_chambres').value,
         surface: this.annonceForm.get('surface').value,
         image: this.annonceForm.get('image').value,
-      };
+        date : this.annonceForm.get('date').value      };
 
       console.log('Annonce Created:', annonce);
       this.annonceService.createAnnonce(annonce).subscribe({

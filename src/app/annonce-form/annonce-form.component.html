@@ -1,23 +1,26 @@
-<div style="height: 40px;"></div>
+<div style="height: 40px"></div>
 <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
   <form
     [formGroup]="annonceForm"
     (ngSubmit)="onSubmit()"
     class="container py-4 px-5 rounded shadow-lg bg-white"
-    style="max-width: 500px">
+    style="max-width: 500px"
+  >
     <!-- Header -->
-    <h2 class="text-center mb-4" style="font-weight: bold; color: #333;">
+    <h2 class="text-center mb-4" style="font-weight: bold; color: #333">
       Ajouter une annonce
     </h2>
 
     <!-- Form Group: Titre -->
     <div class="form-group mb-3">
-      <label for="titre" class="form-label" style="font-weight: 600;">Titre:</label>
+      <label for="titre" class="form-label" style="font-weight: 600"
+        >Titre:</label
+      >
       <input
         id="titre"
         formControlName="titre"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -30,41 +33,75 @@
         </small>
       </div>
     </div>
+    <div class="form-group mb-3">
+      <label for="image" class="form-label" style="font-weight: 600"
+        >Image:</label
+      >
+      <input
+        id="image"
+        formControlName="image"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+      />
+      <div
+        *ngIf="
+          annonceForm.get('image')?.invalid && annonceForm.get('image')?.touched
+        "
+        class="text-danger mt-1"
+      >
+        <small *ngIf="annonceForm.get('image')?.errors?.['required']">
+          L'image est requis.
+        </small>
+      </div>
+    </div>
 
     <!-- Form Group: Localisation -->
     <div class="form-group mb-3">
-      <label for="localisation" class="form-label" style="font-weight: 600;">
+      <label for="localisation" class="form-label" style="font-weight: 600">
         Localisation:
       </label>
       <input
         id="localisation"
         formControlName="localisation"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="localisation" class="form-label" style="font-weight: 600">
+        Date:
+      </label>
+      <input
+        id="date"
+        formControlName="date"
+        class="form-control"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       />
     </div>
 
     <!-- Form Group: Category -->
     <div class="form-group mb-3">
-      <label for="category" class="form-label" style="font-weight: 600;">
+      <label for="category" class="form-label" style="font-weight: 600">
         Catégorie:
       </label>
       <input
         id="category"
         formControlName="category"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       />
     </div>
 
     <!-- Form Group: Prix -->
     <div class="form-group mb-3">
-      <label for="price" class="form-label" style="font-weight: 600;">Prix:</label>
+      <label for="price" class="form-label" style="font-weight: 600"
+        >Prix:</label
+      >
       <input
         id="price"
         formControlName="price"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -83,14 +120,14 @@
 
     <!-- Form Group: Description -->
     <div class="form-group mb-3">
-      <label for="description" class="form-label" style="font-weight: 600;">
+      <label for="description" class="form-label" style="font-weight: 600">
         Description:
       </label>
       <textarea
         id="description"
         formControlName="description"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       ></textarea>
     </div>
 
@@ -99,7 +136,7 @@
       <label
         for="nombre_de_chambres"
         class="form-label"
-        style="font-weight: 600;"
+        style="font-weight: 600"
       >
         Nombre de Chambres:
       </label>
@@ -107,7 +144,7 @@
         id="nombre_de_chambres"
         formControlName="nombre_de_chambres"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -131,18 +168,19 @@
 
     <!-- Form Group: Surface -->
     <div class="form-group mb-4">
-      <label for="surface" class="form-label" style="font-weight: 600;">
+      <label for="surface" class="form-label" style="font-weight: 600">
         Surface:
       </label>
       <input
         id="surface"
         formControlName="surface"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc;"
+        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
-          annonceForm.get('surface')?.invalid && annonceForm.get('surface')?.touched
+          annonceForm.get('surface')?.invalid &&
+          annonceForm.get('surface')?.touched
         "
         class="text-danger mt-1"
       >
@@ -176,4 +214,3 @@
     </div>
   </form>
 </div>
-
