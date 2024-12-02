@@ -11,37 +11,40 @@ import { FavorisService } from '../services/favoris.service';
 })
 export class FavorisComponent implements OnInit {
   favorites: any[] = [];
-  annonces: any[] = [];    // Assuming you fetch all annonces for toggling favorites
-  userId = 1;             // Replace with the current logged-in user ID
+  annonces: any[] = []; // Assume this gets loaded elsewhere or via another service
+  currentUser: any;
 
-  constructor(private favorisService: FavorisService) {}
+  constructor(private favoritesService: FavorisService) {}
 
   ngOnInit(): void {
-    this.getFavorites();
-    this.getAnnonces();
+    this.loadCurrentUser();
+    this.fetchFavorites();
   }
 
-  getFavorites(): void {
-    this.favorisService.getFavoritesByUser(this.userId).subscribe({
-      next: (response) => {
-        this.favorites = response;
-      },
-      error: (err) => console.error('Error fetching favorites', err),
-    });
+  loadCurrentUser(): void {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      this.currentUser = JSON.parse(user);
+    } else {
+      console.error('No current user found in localStorage');
+    }
   }
 
-  getAnnonces(): void {
-    this.favorisService.getAnnonces().subscribe({
-      next: (response) => {
-        this.annonces = response;
-      },
-      error: (err) => console.error('Error fetching annonces', err),
-    });
+  fetchFavorites(): void {
+    if (this.currentUser && this.currentUser.id) {
+      this.favoritesService.getFavoritesByUser(this.currentUser.id).subscribe(
+        (data) => {
+          this.favorites = data;
+        },
+        (error) => {
+          console.error('Error fetching favorites:', error);
+        }
+      );
+    }
   }
 
   toggleFavorite(annonce: any): void {
-    const favorite = this.favorites.find((f) => f.annonce.id === annonce.id);
-
+    const favorite = this.favorites.find(fav => fav.annonce.id === annonce.id);
     if (favorite) {
       this.removeFavorite(favorite.id);
     } else {
@@ -50,25 +53,34 @@ export class FavorisComponent implements OnInit {
   }
 
   addFavorite(annonceId: number): void {
-    const favoriteData = { user_id: this.userId, annonce_id: annonceId };
-    this.favorisService.createFavorite(favoriteData).subscribe({
-      next: (response) => {
-        this.favorites.push(response.favorite);
+    const favoriteData = {
+      user_id: this.currentUser.id,
+      annonce_id: annonceId
+    };
+    this.favoritesService.addFavorite(favoriteData).subscribe(
+      (response) => {
+        console.log('Favorite added:', response);
+        this.fetchFavorites();
       },
-      error: (err) => console.error('Error adding favorite', err),
-    });
+      (error) => {
+        console.error('Error adding favorite:', error);
+      }
+    );
   }
 
   removeFavorite(favoriteId: number): void {
-    this.favorisService.deleteFavorite(favoriteId).subscribe({
-      next: () => {
-        this.favorites = this.favorites.filter((fav) => fav.id !== favoriteId);
+    this.favoritesService.removeFavorite(favoriteId).subscribe(
+      (response) => {
+        console.log('Favorite removed:', response);
+        this.fetchFavorites();
       },
-      error: (err) => console.error('Error removing favorite', err),
-    });
+      (error) => {
+        console.error('Error removing favorite:', error);
+      }
+    );
   }
 
   isFavorite(annonceId: number): boolean {
-    return this.favorites.some((fav) => fav.annonce.id === annonceId);
+    return this.favorites.some(fav => fav.annonce.id === annonceId);
   }
 }

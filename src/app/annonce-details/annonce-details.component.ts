@@ -4,6 +4,9 @@ import { Annonce } from '../models/annonce.model';
 import { AnnonceService } from '../services/annonce.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentaireService } from '../services/commentaire.service';
+import { OccupationService } from '../services/occupation.service';
+import { OccupationCreation } from '../models/occupation';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-annonce-details',
@@ -18,7 +21,8 @@ export class AnnonceDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private annonceService: AnnonceService, // Service to fetch annonce details
     private commentaireService: CommentaireService,
-    private fb: FormBuilder
+    private occupationService: OccupationService,
+    private fb: FormBuilder, private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -38,6 +42,40 @@ export class AnnonceDetailsComponent implements OnInit {
       }
     );
   }
+
+
+
+  formatDate(date: Date | null): string | null {
+    if (!date) return null;
+    return this.datePipe.transform(date, 'yyyy-MM-dd'); // Format the date to YYYY-MM-DD
+  }
+
+  makeoccupation(): void {
+    const date = new Date();
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const newOccupation: OccupationCreation = {
+      owner: this.annonce.owner.id,
+      client: user.id,
+      annonce: this.annonce.id,
+      occupation_type: this.annonce.category,
+      start_date: this.formatDate(date),
+      end_date: null,
+      is_active: "en attente",
+    };
+    console.log(JSON.stringify(newOccupation));
+    this.occupationService.makeOccupation(newOccupation).subscribe({
+      next: (response) => {
+        alert(JSON.stringify(response));
+      },
+    });
+  }
+
+
+
+
+
+
+
   initForm(): void {
     this.commentForm = this.fb.group({
       contenu: ['', [Validators.required, Validators.minLength(3)]],

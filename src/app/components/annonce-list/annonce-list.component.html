@@ -73,6 +73,12 @@
             <ng-template #notEquipped>Non équipé</ng-template>
           </p>
         </div>
+        <button 
+        (click)="toggleFavorite(annonce)" 
+        [class.active]="isFavorite(annonce.id)"
+        class="btn btn-light">
+        <i class="fa fa-star" [class.favorited]="isFavorite(annonce.id)"></i>
+      </button>
 
         <!-- Footer with button -->
         <div class="card-footer text-center">
