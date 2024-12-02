@@ -7,6 +7,7 @@ import { FavorisComponent } from './favoris/favoris.component';
 import { OccupationListComponent } from './occupation-list/occupation-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MesannoncesComponent } from './mesannonces/mesannonces.component';
 
 const routes: Routes = [
   { path: 'annonces', component: AnnonceListComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'favoris', component: FavorisComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'myannones', component: MesannoncesComponent },
 
   { path: 'details/:id', component: AnnonceDetailsComponent }, // Route for details
   { path: 'occupations/:annonceId', component: OccupationListComponent }, //route demande

@@ -1,0 +1,12 @@
+.fa-star {
+    font-size: 16px;
+    color: gray;
+    transition: color 0.3s;
+  }
+  
+  .fa-star.favorited {
+    color: gold;
+  }
+  .btn {
+    border: none;
+  }
