@@ -1,14 +1,20 @@
-<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light">
+<div
+  class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-light"
+>
   <div
     class="row w-100 h-100 d-flex justify-content-center align-items-center"
-    style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);"
+    style="background: linear-gradient(135deg, #f8f9fa, #e9ecef)"
   >
     <div
       class="col-md-8 col-lg-6 mx-auto p-5 rounded shadow-lg"
-      style="background: #ffffff; border-radius: 16px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);"
+      style="
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      "
     >
       <!-- Title -->
-      <h1 class="text-center mb-4" style="font-weight: bold; color: #333;">
+      <h1 class="text-center mb-4" style="font-weight: bold; color: #333">
         {{ annonce.titre }}
       </h1>
 
@@ -19,21 +25,21 @@
           [src]="annonce.image"
           alt="Image de l'annonce"
           class="img-fluid rounded"
-          style="max-height: 250px; object-fit: cover; border-radius: 12px;"
+          style="max-height: 250px; object-fit: cover; border-radius: 12px"
         />
         <img
           *ngIf="annonce.image === 'no image added'"
           src="https://via.placeholder.com/300x200"
           alt="Image Placeholder"
           class="img-fluid rounded"
-          style="max-height: 250px; object-fit: cover; border-radius: 12px;"
+          style="max-height: 250px; object-fit: cover; border-radius: 12px"
         />
       </div>
 
       <!-- Details Section -->
       <div
         class="details mb-4"
-        style="font-size: 16px; color: #555; line-height: 1.6;"
+        style="font-size: 16px; color: #555; line-height: 1.6"
       >
         <p><strong>Localisation:</strong> {{ annonce.localisation }}</p>
         <p><strong>Catégorie:</strong> {{ annonce.category }}</p>
@@ -42,7 +48,7 @@
         <p><strong>Chambres:</strong> {{ annonce.nombre_de_chambres }}</p>
         <p><strong>Surface:</strong> {{ annonce.surface }} m²</p>
         <p><strong>Date:</strong> {{ annonce.date | date }}</p>
-        <p><strong>Équipé:</strong> {{ annonce.equiped ? 'Oui' : 'Non' }}</p>
+        <p><strong>Équipé:</strong> {{ annonce.equiped ? "Oui" : "Non" }}</p>
       </div>
 
       <!-- Buttons Section -->
@@ -64,7 +70,7 @@
         >
           Retour à la liste
         </a>
-        <a 
+        <a
           (click)="makeoccupation()"
           class="btn btn-primary"
           style="
@@ -86,19 +92,26 @@
 
       <!-- Comments Section -->
       <div class="comments mt-4">
-        <h4 style="color: #555;">Commentaires</h4>
+        <h4 style="color: #555">Commentaires</h4>
 
         <!-- Comment Form -->
-        <form (ngSubmit)="onAddComment()" [formGroup]="commentForm" class="mb-3">
+        <form
+          (ngSubmit)="onAddComment()"
+          [formGroup]="commentForm"
+          class="mb-3"
+        >
           <textarea
             class="form-control mb-2"
-            formControlName="comment"
+            formControlName="contenu"
             rows="3"
             placeholder="Écrivez votre commentaire ici..."
-            style="border-radius: 8px;"
+            style="border-radius: 8px"
           ></textarea>
           <div
-            *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched"
+            *ngIf="
+              commentForm.get('contenu')?.invalid &&
+              commentForm.get('contenu')?.touched
+            "
             class="text-danger mb-2"
           >
             <small>Le commentaire est requis.</small>
@@ -107,15 +120,19 @@
             type="submit"
             class="btn btn-primary btn-sm"
             [disabled]="commentForm.invalid"
-            style="background: #0056b3; border-radius: 8px;"
+            style="background: #0056b3; border-radius: 8px"
           >
             Publier
           </button>
         </form>
 
         <!-- Display Comments -->
-        <div *ngFor="let comment of comments" class="mb-3 p-3 bg-light rounded shadow-sm">
-          <p class="mb-1">{{ comment.content }}</p>
+        <div
+          *ngFor="let comment of comments"
+          class="mb-3 p-3 bg-light rounded shadow-sm"
+        >
+          <p class="mb">{{ comment.user_id }}</p>
+          <p class="mb-1">{{ comment.contenu }}</p>
         </div>
         <p *ngIf="comments.length === 0" class="text-muted text-center">
           Aucun commentaire pour le moment. Soyez le premier à commenter !
