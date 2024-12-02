@@ -70,3 +70,20 @@ img.img-fluid {
     transform: scale(1);
   }
 }
+
+.btn-custom {
+  background-color: #4a90e2; /* Un bleu classe */
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-custom:hover {
+  background-color: #357ab8; /* Bleu foncé au survol */
+  transform: translateY(-2px); /* Léger effet de survol */
+}
+
+.btn-custom:focus {
+  outline: none;
+  box-shadow: 0 0 5px #357ab8; /* Accentuation sur le focus */
+}

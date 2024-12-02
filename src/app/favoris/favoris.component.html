@@ -20,11 +20,12 @@
             {{ favorite.annonce.description }}
           </p>
           <button
-            class="btn btn-success mb-2"
-            (click)="goToDetails(favorite.annonce.id)"
-          >
-            voir l'annonce
-          </button>
+  class="btn btn-custom mb-2"
+  (click)="goToDetails(favorite.annonce.id)"
+>
+  voir l'annonce
+</button>
+
           <button
             (click)="toggleFavorite(favorite.annonce)"
             [class.active]="isFavorite(favorite.annonce.id)"
