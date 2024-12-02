@@ -62,22 +62,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            <li class="nav-item"   >
               <a class="nav-link" routerLink="annonces">Les annonces</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isowner()">
               <a class="nav-link" routerLink="myannones">Mes annonces</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isclient()">
               <a class="nav-link" routerLink="mydemandes">Mes Demandes</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isowner()">
               <a class="nav-link" routerLink="create-annonce"
                 >Créer une annonce</a
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="isowner()">
               <a class="nav-link" routerLink="occupations/:annonceId"
                 >Demande</a
               >
