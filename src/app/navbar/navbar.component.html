@@ -10,52 +10,77 @@
       rel="stylesheet"
     />
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+
       .navbar {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
+
       .navbar-brand {
         font-weight: bold;
         font-size: 1.5rem;
       }
+
       .nav-link {
         font-size: 1rem;
         transition: color 0.3s ease;
       }
+
       .nav-link:hover {
-        color: #f8d90f !important; /* Jaune vif pour l'effet hover */
+        color: #f8d90f !important; /* Jaune vif */
       }
+
       .user-info {
         display: flex;
         align-items: center;
         gap: 10px;
-        color: #f8d90f;
-        font-weight: bold;
-        margin-right: 15px;
+        padding: 5px 15px;
+        background-color: #1a1a1a;
+        border-radius: 25px;
+        color: white;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.3s ease;
       }
+
+      .user-info:hover {
+        background-color: #2b2b2b;
+        transform: translateY(-2px);
+      }
+
       .user-info img {
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: cover;
       }
-      .logout-btn img {
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        object-fit: cover;
-        margin-right: 5px;
+
+      .user-info .username {
+        font-size: 1rem;
       }
+
       .logout-btn {
+        color: white;
+        font-size: 1rem;
+        text-decoration: none;
         display: flex;
         align-items: center;
         gap: 5px;
-        text-decoration: none;
-        color: white;
-        transition: transform 0.3s ease, color 0.3s ease;
+        transition: color 0.3s ease, transform 0.3s ease;
       }
+
       .logout-btn:hover {
+        color: #f8d90f;
         transform: scale(1.1);
-        color: #f8d90f; /* Jaune vif */
+      }
+
+      .logout-btn img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
       }
     </style>
   </head>
@@ -86,22 +111,14 @@
               <a class="nav-link" routerLink="mydemandes">Mes Demandes</a>
             </li>
             <li class="nav-item" *ngIf="isowner()">
-              <a class="nav-link" routerLink="create-annonce"
-                >Créer une annonce</a
-              >
+              <a class="nav-link" routerLink="create-annonce">Créer une annonce</a>
             </li>
             <li class="nav-item" *ngIf="isowner()">
-              <a class="nav-link" routerLink="occupations/:annonceId"
-                >Demande</a
-              >
+              <a class="nav-link" routerLink="occupations/:annonceId">Demande</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="favoris">Favoris</a>
             </li>
-            <div class="user-info">
-              <img src="assets/user.png" alt="Avatar" />
-              <span>{{ getUser().username }}</span>
-            </div>
             <li class="nav-item">
               <a (click)="logout()" class="logout-btn">
                 <img
@@ -112,6 +129,10 @@
               </a>
             </li>
           </ul>
+          <div class="user-info ms-3">
+            <img src="assets/user.png" alt="Avatar" />
+            <span class="username">{{ getUser().username }}</span>
+          </div>
         </div>
       </div>
     </nav>
