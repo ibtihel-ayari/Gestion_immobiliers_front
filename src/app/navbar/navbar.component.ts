@@ -24,5 +24,9 @@ export class NavbarComponent implements OnInit {
   isclient() : boolean {
     return this.auth.isclient()
   }
+  getUser() : any {
+    const user = JSON.parse(localStorage.getItem('currentUser'))
+    return  user
+  }
 
 }
