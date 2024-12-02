@@ -11,7 +11,7 @@ export class CommentaireService {
   constructor(private http: HttpClient) { }
 
   getCommentairesByAnnonce(annonceId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${annonceId}`);
+    return this.http.get(`${this.baseUrl}/getall/${annonceId}`);
   }
 
   ajouterCommentaire(contenu: any): Observable<any> {
