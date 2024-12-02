@@ -5,10 +5,9 @@ import { Occupation } from '../models/occupation';
 @Component({
   selector: 'app-mesdemandes',
   templateUrl: './mesdemandes.component.html',
-  styleUrls: ['./mesdemandes.component.css']
+  styleUrls: ['./mesdemandes.component.css'],
 })
 export class MesdemandesComponent implements OnInit {
-
   occupations: Occupation[] = [];
   user: any;
 
@@ -23,33 +22,31 @@ export class MesdemandesComponent implements OnInit {
   }
 
   loadOccupations(): void {
-    this.occupationService.getOccupationsByOwner(this.user.id).subscribe({
+    this.occupationService.getOccupationsByClient(this.user.id).subscribe({
       next: (data) => {
         this.occupations = data;
       },
-      error: (err) => console.error(err)
+      error: (err) => console.error(err),
     });
   }
 
   handleAccept(occupationId: number): void {
-    this.occupationService.acceptOccupation(occupationId,"accepted").subscribe({
-      next: () => {
-        this.loadOccupations();
-      },
-      error: (err) => console.error(err)
-    });
+    this.occupationService
+      .acceptOccupation(occupationId, 'accepted')
+      .subscribe({
+        next: () => {
+          this.loadOccupations();
+        },
+        error: (err) => console.error(err),
+      });
   }
 
   handleRefuse(occupationId: number): void {
-    this.occupationService.acceptOccupation(occupationId,"refused").subscribe({
+    this.occupationService.acceptOccupation(occupationId, 'refused').subscribe({
       next: () => {
         this.loadOccupations();
       },
-      error: (err) => console.error(err)
+      error: (err) => console.error(err),
     });
   }
-
-
 }
-
-

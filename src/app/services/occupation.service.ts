@@ -18,10 +18,11 @@ export class OccupationService {
   acceptOccupation(id: number,status: string ): Observable<any> {
     return this.http.post(`${this.apiUrl}/activate/${id}/status/${status}`, {});
   }
-
-  refuseOccupation(id: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/refuse/${id}/`, {}); // Placeholder, adjust as per backend
+  getOccupationsByClient(ownerId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/client/${ownerId}/`);
   }
+
+  
   makeOccupation(occupation: OccupationCreation): Observable<any> {
     return this.http.post<any>(this.apiUrl + '/create', occupation);
   }
