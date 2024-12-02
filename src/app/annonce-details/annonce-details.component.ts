@@ -7,6 +7,7 @@ import { CommentaireService } from '../services/commentaire.service';
 import { OccupationService } from '../services/occupation.service';
 import { OccupationCreation } from '../models/occupation';
 import { DatePipe } from '@angular/common';
+import { Commentaire } from '../models/comment';
 
 @Component({
   selector: 'app-annonce-details',
@@ -15,14 +16,15 @@ import { DatePipe } from '@angular/common';
 })
 export class AnnonceDetailsComponent implements OnInit {
   annonce!: Annonce;
-  comments: any[] = []; // Liste des commentaires
+  comments: Commentaire[] = [];
   commentForm!: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private annonceService: AnnonceService, // Service to fetch annonce details
     private commentaireService: CommentaireService,
     private occupationService: OccupationService,
-    private fb: FormBuilder, private datePipe: DatePipe
+    private fb: FormBuilder,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class AnnonceDetailsComponent implements OnInit {
     this.initForm();
     this.fetchCommentaires(id);
   }
+
   loadAnnonces(id) {
     this.annonceService.getAnnonces().subscribe(
       (data: Annonce[]) => {
@@ -42,8 +45,6 @@ export class AnnonceDetailsComponent implements OnInit {
       }
     );
   }
-
-
 
   formatDate(date: Date | null): string | null {
     if (!date) return null;
@@ -60,7 +61,7 @@ export class AnnonceDetailsComponent implements OnInit {
       occupation_type: this.annonce.category,
       start_date: this.formatDate(date),
       end_date: null,
-      is_active: "en attente",
+      is_active: 'en attente',
     };
     console.log(JSON.stringify(newOccupation));
     this.occupationService.makeOccupation(newOccupation).subscribe({
@@ -70,12 +71,6 @@ export class AnnonceDetailsComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-
   initForm(): void {
     this.commentForm = this.fb.group({
       contenu: ['', [Validators.required, Validators.minLength(3)]],
@@ -84,33 +79,35 @@ export class AnnonceDetailsComponent implements OnInit {
 
   fetchCommentaires(id): void {
     const annonceId = id;
-    this.commentaireService.getCommentairesByAnnonce(annonceId).subscribe(
-      (data) => {
-        this.comments = data;
+    this.commentaireService.getCommentairesByAnnonce(annonceId).subscribe({
+      next: (response) => {
+        this.comments = response;
       },
-      (error) => {
-        console.error('Erreur lors de la récupération des commentaires:', error);
-      }
-    );
+      error: () => {},
+    });
   }
 
   onAddComment(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    const user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.commentForm.valid) {
-      const newComment = {
-        contenu: this.commentForm.value.contenu,
-        annonce: this.annonce.id,
-        user: 1, // Remplacez par l'ID de l'utilisateur connecté
+      const newComment: Commentaire = {
+        user_id: user.id,
+        annonce_id: parseInt(id),
+        contenu: this.commentForm.get('contenu').value,
       };
 
-      this.commentaireService.ajouterCommentaire(newComment).subscribe(
-        (data) => {
-          this.comments.push(data);
-          this.commentForm.reset();
+      this.commentaireService.ajouterCommentaire(newComment).subscribe({
+        next: () => {
+          alert('added');
+          const id = this.route.snapshot.paramMap.get('id');
+          this.fetchCommentaires(id);
         },
-        (error) => {
-          console.error('Erreur lors de l’ajout du commentaire:', error);
-        }
-      );
+        error: () => {
+          alert('error');
+        },
+      });
     }
-
-  }}
+  }
+}
