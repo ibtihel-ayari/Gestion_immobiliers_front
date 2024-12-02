@@ -9,8 +9,9 @@ import { AnnonceCreation } from '../models/create-annoce';
   templateUrl: './annonce-form.component.html',
 })
 export class AnnonceFormComponent implements OnInit {
-  annonceForm: FormGroup;
+  predictedPrice: number | string = '';
 
+  annonceForm: FormGroup;
   constructor(private fb: FormBuilder, private annonceService: AnnonceService) {
     this.annonceForm = this.fb.group({
       id: [null],
@@ -24,11 +25,16 @@ export class AnnonceFormComponent implements OnInit {
         [Validators.required, Validators.pattern('^[0-9]*$')],
       ],
       surface: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      date: ['',[Validators.required]],
-      image: ['',[Validators.required]],
+      date: ['', [Validators.required]],
+      image: ['', [Validators.required]],
+      is_occupied: [false],
     });
   }
-
+  predictPrice() {
+    this.annonceForm.patchValue({
+      price: 1200,
+    });
+  }
   ngOnInit(): void {}
 
   // Function to submit the form data
@@ -46,7 +52,9 @@ export class AnnonceFormComponent implements OnInit {
         nombre_de_chambres: this.annonceForm.get('nombre_de_chambres').value,
         surface: this.annonceForm.get('surface').value,
         image: this.annonceForm.get('image').value,
-        date : this.annonceForm.get('date').value      };
+        date: this.annonceForm.get('date').value,
+        is_occupied: this.annonceForm.get('is_occupied').value,
+      };
 
       console.log('Annonce Created:', annonce);
       this.annonceService.createAnnonce(annonce).subscribe({

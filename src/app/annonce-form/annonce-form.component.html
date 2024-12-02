@@ -3,8 +3,8 @@
   <form
     [formGroup]="annonceForm"
     (ngSubmit)="onSubmit()"
-    class="container py-4 px-5 rounded shadow-lg bg-white"
-    style="max-width: 500px"
+    class="container py-5 px-4 rounded shadow-lg bg-white"
+    style="max-width: 600px; padding: 20px"
   >
     <!-- Header -->
     <h2 class="text-center mb-4" style="font-weight: bold; color: #333">
@@ -12,15 +12,15 @@
     </h2>
 
     <!-- Form Group: Titre -->
-    <div class="form-group mb-3">
-      <label for="titre" class="form-label" style="font-weight: 600"
-        >Titre:</label
-      >
+    <div class="form-group mb-4">
+      <label for="titre" class="form-label" style="font-weight: 600">
+        Titre:
+      </label>
       <input
         id="titre"
         formControlName="titre"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -33,15 +33,17 @@
         </small>
       </div>
     </div>
-    <div class="form-group mb-3">
-      <label for="image" class="form-label" style="font-weight: 600"
-        >Image:</label
-      >
+
+    <!-- Form Group: Image -->
+    <div class="form-group mb-4">
+      <label for="image" class="form-label" style="font-weight: 600">
+        Image:
+      </label>
       <input
         id="image"
         formControlName="image"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -50,13 +52,13 @@
         class="text-danger mt-1"
       >
         <small *ngIf="annonceForm.get('image')?.errors?.['required']">
-          L'image est requis.
+          L'image est requise.
         </small>
       </div>
     </div>
 
     <!-- Form Group: Localisation -->
-    <div class="form-group mb-3">
+    <div class="form-group mb-4">
       <label for="localisation" class="form-label" style="font-weight: 600">
         Localisation:
       </label>
@@ -64,57 +66,73 @@
         id="localisation"
         formControlName="localisation"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       />
     </div>
-    <div class="form-group mb-3">
-      <label for="localisation" class="form-label" style="font-weight: 600">
-        Date:
+
+    <!-- Form Group: Date de debut -->
+    <div class="form-group mb-4">
+      <label for="date" class="form-label" style="font-weight: 600">
+        Date de debut:
       </label>
       <input
         id="date"
         formControlName="date"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       />
     </div>
-<!-- Form Group: Category -->
-<div class="form-group mb-3">
-  <label class="form-label" style="font-weight: 600">Catégorie:</label>
-  <div class="form-check">
-    <input
-      type="radio"
-      id="vente"
-      value="vente"
-      class="form-check-input"
-      formControlName="category"
-    />
-    <label for="vente" class="form-check-label">Vente</label>
-  </div>
-  <div class="form-check">
-    <input
-      type="radio"
-      id="location"
-      value="location"
-      class="form-check-input"
-      formControlName="category"
-    />
-    <label for="location" class="form-check-label">Location</label>
-  </div>
-</div>
 
+    <!-- Form Group: Category -->
+    <div class="form-group mb-4">
+      <label class="form-label" style="font-weight: 600">Catégorie:</label>
+      <div class="form-check">
+        <input
+          type="radio"
+          id="vente"
+          value="vente"
+          class="form-check-input"
+          formControlName="category"
+        />
+        <label for="vente" class="form-check-label">Vente</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="radio"
+          id="location"
+          value="location"
+          class="form-check-input"
+          formControlName="category"
+        />
+        <label for="location" class="form-check-label">Location</label>
+      </div>
+    </div>
 
     <!-- Form Group: Prix -->
-    <div class="form-group mb-3">
-      <label for="price" class="form-label" style="font-weight: 600"
-        >Prix:</label
-      >
+    <div class="form-group mb-4 d-flex align-items-center">
+      <label for="price" class="form-label" style="font-weight: 600">
+        Prix:
+      </label>
       <input
         id="price"
         formControlName="price"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="
+          border-radius: 8px;
+          padding: 12px;
+          border: 1px solid #ccc;
+          width: 70%;
+        "
       />
+      <button
+        type="button"
+        class="btn btn-outline-primary ml-3 mb-2"
+        (click)="predictPrice()"
+        style="border-radius: 8px; padding: 12px 18px"
+      >
+        Prédire le prix
+      </button>
+
       <div
         *ngIf="
           annonceForm.get('price')?.invalid && annonceForm.get('price')?.touched
@@ -131,7 +149,7 @@
     </div>
 
     <!-- Form Group: Description -->
-    <div class="form-group mb-3">
+    <div class="form-group mb-4">
       <label for="description" class="form-label" style="font-weight: 600">
         Description:
       </label>
@@ -139,12 +157,12 @@
         id="description"
         formControlName="description"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       ></textarea>
     </div>
 
     <!-- Form Group: Nombre de Chambres -->
-    <div class="form-group mb-3">
+    <div class="form-group mb-4">
       <label
         for="nombre_de_chambres"
         class="form-label"
@@ -156,7 +174,7 @@
         id="nombre_de_chambres"
         formControlName="nombre_de_chambres"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -187,7 +205,7 @@
         id="surface"
         formControlName="surface"
         class="form-control"
-        style="border-radius: 8px; padding: 10px; border: 1px solid #ccc"
+        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
       />
       <div
         *ngIf="
@@ -203,6 +221,12 @@
           Doit être un nombre.
         </small>
       </div>
+    </div>
+
+    <div class="form-group mb-4">
+      <label>
+        <input type="checkbox" formControlName="is_occupied" /> équipé
+      </label>
     </div>
 
     <!-- Submit Button -->
