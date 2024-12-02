@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Annonce } from '../models/annonce.model';
 import { AnnonceService } from '../services/annonce.service';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { FavorisService } from '../services/favoris.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class FavorisComponent implements OnInit {
   annonces: any[] = []; // Assume this gets loaded elsewhere or via another service
   currentUser: any;
 
-  constructor(private favoritesService: FavorisService) {}
+  constructor(private favoritesService: FavorisService,private router : Router) {}
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -27,6 +27,11 @@ export class FavorisComponent implements OnInit {
       this.currentUser = JSON.parse(user);
     } else {
       console.error('No current user found in localStorage');
+    }
+  }
+  goToDetails(id: number | undefined) {
+    if (id !== undefined) {
+      this.router.navigate(['/details', id]);
     }
   }
 

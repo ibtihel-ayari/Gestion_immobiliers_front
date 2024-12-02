@@ -1,10 +1,11 @@
 <div class="favorites-container container py-5">
-  <h2 class="text-center mb-5 ">Your Favorites</h2>
+  <h2 class="text-center mb-5">Your Favorites</h2>
 
   <!-- Empty State -->
   <div *ngIf="favorites.length === 0" class="empty-favorites text-center">
-    <p class="alert alert-info text-center shadow-sm">You haven't added any favorites yet!</p>
-    
+    <p class="alert alert-info text-center shadow-sm">
+      You haven't added any favorites yet!
+    </p>
   </div>
 
   <!-- Favorites List -->
@@ -12,19 +13,30 @@
     <div class="col-md-6 col-lg-4" *ngFor="let favorite of favorites">
       <div class="favorite-item card border-0 shadow-sm h-100">
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title text-truncate text-dark">{{ favorite.annonce.title }}</h5>
-          <p class="card-text text-muted mb-4">{{ favorite.annonce.description }}</p>
-          <button 
-          (click)="toggleFavorite(favorite.annonce)" 
-          [class.active]="isFavorite(favorite.annonce.id)"
-          class="btn btn-light">
-          <i class="fa fa-star" [class.favorited]="isFavorite(favorite.annonce.id)"></i>
-        </button>
+          <h5 class="card-title text-truncate text-dark">
+            {{ favorite.annonce.title }}
+          </h5>
+          <p class="card-text text-muted mb-4">
+            {{ favorite.annonce.description }}
+          </p>
+          <button
+            class="btn btn-success mb-2"
+            (click)="goToDetails(favorite.annonce.id)"
+          >
+            voir l'annonce
+          </button>
+          <button
+            (click)="toggleFavorite(favorite.annonce)"
+            [class.active]="isFavorite(favorite.annonce.id)"
+            class="btn btn-light"
+          >
+            <i
+              class="fa fa-star"
+              [class.favorited]="isFavorite(favorite.annonce.id)"
+            ></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-  
-  
