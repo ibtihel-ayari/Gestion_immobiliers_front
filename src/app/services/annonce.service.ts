@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Annonce } from '../models/annonce.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AnnonceCreation } from '../models/create-annoce';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AnnonceService {
     return this.http.get<Annonce[]>(`${this.apiUrlget}`);
   }
 
-  createAnnonce(annonce: Annonce): Observable<Annonce> {
-    return this.http.post<Annonce>(this.apiUrl, annonce);
+  createAnnonce(annonce: AnnonceCreation): Observable<Annonce> {
+    return this.http.post<any>(`${this.apiUrl}/create`, annonce);
   }
 }
