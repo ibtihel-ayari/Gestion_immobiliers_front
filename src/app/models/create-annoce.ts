@@ -9,5 +9,5 @@ export interface AnnonceCreation {
   surface: number;
   image: string;
   date: string;
-  is_occupied: boolean;
+  equiped: boolean;
 }

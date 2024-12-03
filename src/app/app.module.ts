@@ -15,6 +15,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MesannoncesComponent } from './mesannonces/mesannonces.component';
 import { MesdemandesComponent } from './mesdemandes/mesdemandes.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { MesdemandesComponent } from './mesdemandes/mesdemandes.component';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
 
   ],
   providers: [DatePipe],

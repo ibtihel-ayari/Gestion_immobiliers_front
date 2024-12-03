@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnnonceService } from '../services/annonce.service';
 import { AnnonceCreation } from '../models/create-annoce';
+import { PredictionService } from '../services/prediction.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-annonce-form',
@@ -12,7 +15,13 @@ export class AnnonceFormComponent implements OnInit {
   predictedPrice: number | string = '';
 
   annonceForm: FormGroup;
-  constructor(private fb: FormBuilder, private annonceService: AnnonceService) {
+  constructor(
+    private fb: FormBuilder,
+    private annonceService: AnnonceService,
+    private predictionService: PredictionService,
+    private snackBar: MatSnackBar, 
+    private router : Router 
+  ) {
     this.annonceForm = this.fb.group({
       id: [null],
       titre: ['', Validators.required],
@@ -30,12 +39,19 @@ export class AnnonceFormComponent implements OnInit {
       is_occupied: [false],
     });
   }
-  predictPrice() {
+  setprice(string: string) {
     this.annonceForm.patchValue({
       price: 1200,
     });
   }
   ngOnInit(): void {}
+  showSnackbar(): void {
+    this.snackBar.open('annonce creé', 'Close', {
+      duration: 3000, // milliseconds
+      horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
+      verticalPosition: 'bottom', // 'top' | 'bottom'
+    });
+  }
 
   // Function to submit the form data
   onSubmit() {
@@ -53,17 +69,31 @@ export class AnnonceFormComponent implements OnInit {
         surface: this.annonceForm.get('surface').value,
         image: this.annonceForm.get('image').value,
         date: this.annonceForm.get('date').value,
-        is_occupied: this.annonceForm.get('is_occupied').value,
+        equiped: this.annonceForm.get('is_occupied').value,
       };
 
       console.log('Annonce Created:', annonce);
       this.annonceService.createAnnonce(annonce).subscribe({
         next: (response) => {
-          alert(JSON.stringify(response));
+          this.showSnackbar();
+          this.router.navigate(['/annonces']);
+
         },
       });
     } else {
       console.log('Form is not valid');
+    }
+  }
+  predict(): void {
+    if (this.annonceForm.valid) {
+      this.predictionService.predictPrice(this.annonceForm.value).subscribe({
+        next: (response) => {
+          this.setprice(response);
+        },
+        error: (error) => {
+          this.predictedPrice = null;
+        },
+      });
     }
   }
 }

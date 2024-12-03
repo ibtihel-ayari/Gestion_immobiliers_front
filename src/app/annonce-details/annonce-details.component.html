@@ -49,6 +49,11 @@
         <p><strong>Surface:</strong> {{ annonce.surface }} m²</p>
         <p><strong>Date:</strong> {{ annonce.date | date }}</p>
         <p><strong>Équipé:</strong> {{ annonce.equiped ? "Oui" : "Non" }}</p>
+        <p>
+          <strong>Numéro du téléphone :</strong>
+          {{ annonce.owner.profile.phone_number }}
+        </p>
+        <p><strong>Email:</strong> {{ annonce.owner.email }}</p>
       </div>
 
       <!-- Buttons Section -->
@@ -86,7 +91,7 @@
           onmouseover="this.style.boxShadow='0 8px 15px rgba(0, 0, 0, 0.2)';"
           onmouseout="this.style.boxShadow='none';"
         >
-          Commander
+          Réserver
         </a>
       </div>
 
@@ -133,7 +138,8 @@
         >
           <div class="comment-header d-flex align-items-center mb-2">
             <span class="user-id fw-bold me-2">{{
-              comment.user.username}}</span>
+              comment.user.username
+            }}</span>
             <small class="text-muted">{{
               comment.date_creation | date : "short"
             }}</small>

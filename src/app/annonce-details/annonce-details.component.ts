@@ -8,6 +8,7 @@ import { OccupationService } from '../services/occupation.service';
 import { OccupationCreation } from '../models/occupation';
 import { DatePipe } from '@angular/common';
 import { Commentaire, create_comment } from '../models/comment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-annonce-details',
@@ -24,7 +25,8 @@ export class AnnonceDetailsComponent implements OnInit {
     private commentaireService: CommentaireService,
     private occupationService: OccupationService,
     private fb: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,13 @@ export class AnnonceDetailsComponent implements OnInit {
     if (!date) return null;
     return this.datePipe.transform(date, 'yyyy-MM-dd'); // Format the date to YYYY-MM-DD
   }
+  showSnackbar(body: string): void {
+    this.snackBar.open(body, 'Close', {
+      duration: 3000, // milliseconds
+      horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
+      verticalPosition: 'bottom', // 'top' | 'bottom'
+    });
+  }
 
   makeoccupation(): void {
     const date = new Date();
@@ -66,7 +75,10 @@ export class AnnonceDetailsComponent implements OnInit {
     console.log(JSON.stringify(newOccupation));
     this.occupationService.makeOccupation(newOccupation).subscribe({
       next: (response) => {
-        alert(JSON.stringify(response));
+        this.showSnackbar('occupation crée');
+      },
+      error: (response) => {
+        this.showSnackbar(JSON.stringify(response.error));
       },
     });
   }
@@ -100,7 +112,7 @@ export class AnnonceDetailsComponent implements OnInit {
 
       this.commentaireService.ajouterCommentaire(newComment).subscribe({
         next: () => {
-          alert('added');
+          this.showSnackbar('Commentaire ajouté');
           const id = this.route.snapshot.paramMap.get('id');
           this.fetchCommentaires(id);
         },

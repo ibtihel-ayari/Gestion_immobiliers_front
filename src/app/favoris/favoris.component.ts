@@ -3,6 +3,7 @@ import { Annonce } from '../models/annonce.model';
 import { AnnonceService } from '../services/annonce.service';
 import { Route, Router } from '@angular/router';
 import { FavorisService } from '../services/favoris.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-favoris',
@@ -14,13 +15,19 @@ export class FavorisComponent implements OnInit {
   annonces: any[] = []; // Assume this gets loaded elsewhere or via another service
   currentUser: any;
 
-  constructor(private favoritesService: FavorisService,private router : Router) {}
+  constructor(private favoritesService: FavorisService,private router : Router, private snackBar : MatSnackBar){}
 
   ngOnInit(): void {
     this.loadCurrentUser();
     this.fetchFavorites();
   }
-
+  showSnackbar(body: string): void {
+    this.snackBar.open(body, 'Close', {
+      duration: 3000, // milliseconds
+      horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
+      verticalPosition: 'bottom', // 'top' | 'bottom'
+    });
+  }
   loadCurrentUser(): void {
     const user = localStorage.getItem('currentUser');
     if (user) {
@@ -52,6 +59,7 @@ export class FavorisComponent implements OnInit {
     const favorite = this.favorites.find(fav => fav.annonce.id === annonce.id);
     if (favorite) {
       this.removeFavorite(favorite.id);
+
     } else {
       this.addFavorite(annonce.id);
     }

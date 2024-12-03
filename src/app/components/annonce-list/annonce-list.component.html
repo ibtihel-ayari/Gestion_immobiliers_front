@@ -2,7 +2,9 @@
   <div class="row mb-4">
     <!-- Filtre de Catégorie -->
     <div class="col-md-4">
-      <label for="categoryFilter" class="form-label">Filtrer par Catégorie</label>
+      <label for="categoryFilter" class="form-label"
+        >Filtrer par Catégorie</label
+      >
       <select
         id="categoryFilter"
         class="form-select"
@@ -26,67 +28,81 @@
           [src]="annonce.image"
           class="card-img-top rounded-top"
           alt="Image de l'annonce"
-          style="height: 200px; object-fit: cover;"
+          style="height: 200px; object-fit: cover"
         />
         <img
           *ngIf="annonce.image === 'no image added'"
           src="https://via.placeholder.com/300x200"
           class="card-img-top rounded-top"
           alt="Image Placeholder"
-          style="height: 200px; object-fit: cover;"
+          style="height: 200px; object-fit: cover"
         />
-        
+
         <!-- Card Body -->
         <div class="card-body">
-          <h5 class="card-title text-truncate" style="font-size: 1.25rem; font-weight: bold;">{{ annonce.titre }}</h5>
-          <p class="card-text text-muted" style="font-size: 0.9rem;">
+          <h5
+            class="card-title text-truncate"
+            style="font-size: 1.25rem; font-weight: bold"
+          >
+            {{ annonce.titre }}
+          </h5>
+          <p class="card-text text-muted" style="font-size: 0.9rem">
             <strong>Localisation:</strong> {{ annonce.localisation }}
           </p>
-          <p class="card-text text-muted" style="font-size: 0.9rem;">
+          <p class="card-text text-muted" style="font-size: 0.9rem">
             <strong>Catégorie:</strong> {{ annonce.category }}
           </p>
-          <p class="card-text" style="font-size: 1rem; font-weight: bold;">
+          <p class="card-text" style="font-size: 1rem; font-weight: bold">
             <strong>Prix:</strong> {{ annonce.price }} Dt
           </p>
-          
+
           <!-- Description -->
-          <p class="card-text text-truncate" style="font-size: 0.9rem;">
+          <p class="card-text text-truncate" style="font-size: 0.9rem">
             <strong>Description:</strong> {{ annonce.description }}
+          </p>
+          <p class="card-text text-truncate" style="font-size: 0.9rem">
+            <strong>Numéro du téléphone:</strong>
+            {{ annonce.owner.profile.phone_number }}
           </p>
 
           <!-- Additional Details -->
           <div class="row">
             <div class="col-6">
-              <p class="card-text text-muted" style="font-size: 0.9rem;">
+              <p class="card-text text-muted" style="font-size: 0.9rem">
                 <strong>Chambres:</strong> {{ annonce.nombre_de_chambres }}
               </p>
             </div>
             <div class="col-6">
-              <p class="card-text text-muted" style="font-size: 0.9rem;">
+              <p class="card-text text-muted" style="font-size: 0.9rem">
                 <strong>Surface:</strong> {{ annonce.surface }} m²
               </p>
             </div>
           </div>
-          <p class="card-text text-muted" style="font-size: 0.9rem;">
+          <p class="card-text text-muted" style="font-size: 0.9rem">
             <strong>Equipé:</strong>
             <span *ngIf="annonce.equiped; else notEquipped">Oui</span>
             <ng-template #notEquipped>Non équipé</ng-template>
           </p>
         </div>
-        <button 
-        (click)="toggleFavorite(annonce)" 
-        [class.active]="isFavorite(annonce.id)"
-        class="btn btn-light">
-        <i class="fa fa-star" [class.favorited]="isFavorite(annonce.id)"></i>
-      </button>
+        <button
+          (click)="toggleFavorite(annonce)"
+          [class.active]="isFavorite(annonce.id)"
+          class="btn btn-light"
+        >
+          <i class="fa fa-star" [class.favorited]="isFavorite(annonce.id)"></i>
+        </button>
 
         <!-- Footer with button -->
         <div class="card-footer text-center">
-          <button class="btn btn-outline-primary btn-sm" (click)="goToDetails(annonce.id)" style="width: 100%;">Voir plus</button>
+          <button
+            class="btn btn-outline-primary btn-sm"
+            (click)="goToDetails(annonce.id)"
+            style="width: 100%"
+          >
+            Voir plus
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-

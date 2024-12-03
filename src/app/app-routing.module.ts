@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'details/:id', component: AnnonceDetailsComponent }, // Route for details
   { path: 'occupations/:annonceId', component: OccupationListComponent }, //route demande
 
-  { path: '', redirectTo: '/annonces', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
