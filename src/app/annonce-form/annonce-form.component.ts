@@ -19,8 +19,8 @@ export class AnnonceFormComponent implements OnInit {
     private fb: FormBuilder,
     private annonceService: AnnonceService,
     private predictionService: PredictionService,
-    private snackBar: MatSnackBar, 
-    private router : Router 
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.annonceForm = this.fb.group({
       id: [null],
@@ -45,8 +45,8 @@ export class AnnonceFormComponent implements OnInit {
     });
   }
   ngOnInit(): void {}
-  showSnackbar(): void {
-    this.snackBar.open('annonce creé', 'Close', {
+  showSnackbar(body: string): void {
+    this.snackBar.open(body, 'Close', {
       duration: 3000, // milliseconds
       horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
       verticalPosition: 'bottom', // 'top' | 'bottom'
@@ -75,9 +75,8 @@ export class AnnonceFormComponent implements OnInit {
       console.log('Annonce Created:', annonce);
       this.annonceService.createAnnonce(annonce).subscribe({
         next: (response) => {
-          this.showSnackbar();
+          this.showSnackbar('annonce creé');
           this.router.navigate(['/annonces']);
-
         },
       });
     } else {
@@ -95,5 +94,13 @@ export class AnnonceFormComponent implements OnInit {
         },
       });
     }
+  }
+  async test(): Promise<any> {
+    setTimeout(() => {
+      this.annonceForm.patchValue({
+        price: 1222,
+      });
+      this.showSnackbar('Prediction termineé');
+    }, 1000);
   }
 }
