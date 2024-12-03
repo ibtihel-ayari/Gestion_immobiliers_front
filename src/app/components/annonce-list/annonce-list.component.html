@@ -53,12 +53,16 @@
             <strong>Catégorie:</strong> {{ annonce.category }}
           </p>
           <p class="card-text" style="font-size: 1rem; font-weight: bold">
-            <strong>Prix:</strong> {{ annonce.price }} Dt
+            <strong>Prix:</strong> {{ annonce.price }} DT
           </p>
 
           <!-- Description -->
           <p class="card-text text-truncate" style="font-size: 0.9rem">
             <strong>Description:</strong> {{ annonce.description }}
+          </p>
+          <p class="card-text text-truncate" style="font-size: 0.9rem">
+            <strong>Proprietaire:</strong>
+            {{ annonce.owner.first_name }} {{ annonce.owner.last_name }}
           </p>
           <p class="card-text text-truncate" style="font-size: 0.9rem">
             <strong>Numéro du téléphone:</strong>

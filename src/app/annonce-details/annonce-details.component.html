@@ -41,6 +41,10 @@
         class="details mb-4"
         style="font-size: 16px; color: #555; line-height: 1.6"
       >
+        <p class="card-text text-truncate" style="font-size: 0.9rem">
+          <strong>Proprietaire:</strong>
+          {{ annonce.owner.first_name }} {{ annonce.owner.last_name }}
+        </p>
         <p><strong>Localisation:</strong> {{ annonce.localisation }}</p>
         <p><strong>Catégorie:</strong> {{ annonce.category }}</p>
         <p><strong>Prix:</strong> {{ annonce.price }} Dt</p>
