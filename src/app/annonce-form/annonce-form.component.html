@@ -36,15 +36,10 @@
 
     <!-- Form Group: Image -->
     <div class="form-group mb-4">
-      <label for="image" class="form-label" style="font-weight: 600">
-        Image:
-      </label>
-      <input
-        id="image"
-        formControlName="image"
-        class="form-control"
-        style="border-radius: 8px; padding: 12px; border: 1px solid #ccc"
-      />
+      <div class="file-upload">
+        <label for="image">Image</label>
+        <input type="file" id="image" (change)="onFileSelect($event)" />
+      </div>
       <div
         *ngIf="
           annonceForm.get('image')?.invalid && annonceForm.get('image')?.touched

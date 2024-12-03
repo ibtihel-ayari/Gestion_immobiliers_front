@@ -39,6 +39,10 @@ export class AnnonceFormComponent implements OnInit {
       is_occupied: [false],
     });
   }
+  onFileSelect(event: any): void {
+    const file = event.target.files[0];
+    this.annonceForm.patchValue({ image: file });
+  }
   setprice(string: string) {
     this.annonceForm.patchValue({
       price: 1200,
@@ -71,10 +75,15 @@ export class AnnonceFormComponent implements OnInit {
         date: this.annonceForm.get('date').value,
         equiped: this.annonceForm.get('is_occupied').value,
       };
+      const formData = new FormData();
+      Object.entries(annonce).forEach(([key, value]) => {
+        formData.append(key, value as any);
+      });
 
-      console.log('Annonce Created:', annonce);
-      this.annonceService.createAnnonce(annonce).subscribe({
+      this.annonceService.createAnnonce(formData).subscribe({
         next: (response) => {
+          console.log(response);
+
           this.showSnackbar('annonce creé');
           this.router.navigate(['/annonces']);
         },

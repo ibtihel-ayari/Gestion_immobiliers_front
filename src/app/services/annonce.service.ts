@@ -17,7 +17,7 @@ export class AnnonceService {
     return this.http.get<Annonce[]>(`${this.apiUrlget}`);
   }
 
-  createAnnonce(annonce: AnnonceCreation): Observable<Annonce> {
+  createAnnonce(annonce: any): Observable<Annonce> {
     return this.http.post<any>(`${this.apiUrl}/create`, annonce);
   }
   getAnnoncesbyowner(id:number): Observable<Annonce[]> {

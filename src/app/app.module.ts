@@ -17,13 +17,17 @@ import { MesannoncesComponent } from './mesannonces/mesannonces.component';
 import { MesdemandesComponent } from './mesdemandes/mesdemandes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnnonceListComponent,
-    NavbarComponent,
+    NavbarComponent,    
     AnnonceFormComponent,
     AnnonceDetailsComponent,
     FavorisComponent,
@@ -41,10 +45,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatButtonModule,
   ],
   providers: [DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

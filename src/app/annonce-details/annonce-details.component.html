@@ -22,7 +22,7 @@
       <div class="text-center mb-4">
         <img
           *ngIf="annonce.image !== 'no image added'"
-          [src]="annonce.image"
+          [src]="'http://localhost:8000/'+annonce.image"
           alt="Image de l'annonce"
           class="img-fluid rounded"
           style="max-height: 250px; object-fit: cover; border-radius: 12px"

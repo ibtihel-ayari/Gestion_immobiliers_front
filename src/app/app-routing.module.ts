@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MesannoncesComponent } from './mesannonces/mesannonces.component';
 import { MesdemandesComponent } from './mesdemandes/mesdemandes.component';
+import { FormControlName } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'annonces', component: AnnonceListComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'myannones', component: MesannoncesComponent },
   { path: 'mydemandes', component: MesdemandesComponent },
+
 
 
   { path: 'details/:id', component: AnnonceDetailsComponent }, // Route for details
