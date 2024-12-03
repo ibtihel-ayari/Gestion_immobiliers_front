@@ -25,7 +25,7 @@
         <!-- Image Section -->
         <img
           *ngIf="annonce.image !== 'no image added'"
-          [src]="annonce.image"
+          [src]="'http://localhost:8000/' + annonce.image"
           class="card-img-top rounded-top"
           alt="Image de l'annonce"
           style="height: 200px; object-fit: cover"
